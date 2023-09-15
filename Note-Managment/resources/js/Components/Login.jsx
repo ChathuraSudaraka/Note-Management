@@ -1,6 +1,7 @@
 import React from "react";
 
 function LoginForm() {
+    var csrfToken = window.Laravel.csrfToken;
     return (
         <div className="min-h-screen py-40 bg-gradient-to-r from-gray-700 to-zinc-950">
             <div className="container mx-auto">
@@ -18,10 +19,16 @@ function LoginForm() {
                             Login your account. It’s free and only takes a
                             minute
                         </p>
-                        <form action="#">
+                        <form action="/login" method="POST">
+                            <input
+                                type="hidden"
+                                name="_token"
+                                value={csrfToken}
+                            />
                             <div className="mt-5">
                                 <input
                                     type="text"
+                                    name="email"
                                     placeholder="Username"
                                     className="border border-gray-400 py-1 px-2 w-full"
                                 />
@@ -29,14 +36,24 @@ function LoginForm() {
                             <div className="mt-5">
                                 <input
                                     type="password"
+                                    name="password"
                                     placeholder="Password"
                                     className="border border-gray-400 py-1 px-2 w-full"
                                 />
                             </div>
                             <div className="mt-5">
-                                <button className="w-full bg-purple-500 py-3 text-center text-white">
+                                <button
+                                    className="w-full bg-purple-500 py-3 text-center text-white"
+                                    type="submit"
+                                >
                                     Login
                                 </button>
+                                <a
+                                    href="/signup"
+                                    className="px-4 py-3 bg-purple-500 text-center text-white"
+                                >
+                                    Go to Register
+                                </a>
                             </div>
                         </form>
                     </div>

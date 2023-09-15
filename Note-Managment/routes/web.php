@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// AUth routes
+Route::post('/register', [UserController::class, 'create']);
+Route::post('/login', [UserController::class, 'login']);
+
+// Note routes
+Route::get('/notes', [NoteController::class, 'get']);
+Route::post('/note/save', [NoteController::class, 'save']);
+
+Route::view('/{path?}', 'welcome');
